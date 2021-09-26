@@ -114,11 +114,26 @@ public class PersonEndpointUnitTest {
     assertThat(response.getStatusCodeValue()).isEqualTo(200);
     assertThat(response.getBody().getMessage()).isEqualTo("Ok");
     
-    person2.setName(null);
-    when(endpoint.store(person2)).thenThrow(new RuntimeException("PersonNameRequired"));
+    when(endpoint.store(person2)).thenThrow(new RuntimeException("AnyKindOfError"));
     response = endpoint.store(person2);
     verify(service).store(person2);
     assertThat(response.getStatusCodeValue()).isEqualTo(400);
-    assertThat(response.getBody().getMessage()).isEqualTo("PersonNameRequired");
+    assertThat(response.getBody().getMessage()).isEqualTo("AnyKindOfError");
+  }
+
+  @Test
+  void testUpdate()
+  {
+    ResponseEntity<MessageResponse> response = endpoint.update(1l, person1);
+    verify(service).update(1l, person1);
+    assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    assertThat(response.getBody().getMessage()).isEqualTo("Ok");
+
+    person2.setName(null);
+    when(endpoint.update(2l, person2)).thenThrow(new RuntimeException("AnyKindOfError"));
+    response = endpoint.update(2l, person2);
+    verify(service).update(2l, person2);
+    assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    assertThat(response.getBody().getMessage()).isEqualTo("AnyKindOfError");
   }
 }

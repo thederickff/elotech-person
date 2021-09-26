@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.elotech.person.models.Person;
@@ -50,6 +51,17 @@ public class PersonEndpoint {
     try {
       service.store(person);
       
+      return ResponseUtility.ok();
+    } catch (Exception e) {
+      return ResponseUtility.exception(e);
+    }
+  }
+
+  @PutMapping("{id}")
+  public ResponseEntity<MessageResponse> update(@PathVariable("id") Long id, @RequestBody Person person)
+  {
+    try {
+      service.update(id, person);
       return ResponseUtility.ok();
     } catch (Exception e) {
       return ResponseUtility.exception(e);

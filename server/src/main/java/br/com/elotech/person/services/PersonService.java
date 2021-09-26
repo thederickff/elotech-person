@@ -52,6 +52,20 @@ public class PersonService {
     repository.save(person);
   }
 
+  public void update(Long id, Person person)
+  {
+    repository.findById(id).orElseThrow(() -> new RuntimeException("PersonNotFound"));
+    validate(person);
+    person.setId(id);
+
+    person.getContacts().forEach(contact -> {
+      contact.setId(null);
+      contact.setPerson(person);
+    });
+
+    repository.save(person);
+  }
+
   public boolean isValid(Person person)
   {
     try {

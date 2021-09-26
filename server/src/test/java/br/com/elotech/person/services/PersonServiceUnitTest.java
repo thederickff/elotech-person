@@ -1,6 +1,7 @@
 package br.com.elotech.person.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -155,5 +156,26 @@ public class PersonServiceUnitTest {
       assertThat(contact.getId()).isEqualTo(null);
       assertThat(contact.getPerson()).isEqualTo(person1);
     });
+  }
+
+  @Test
+  void testUpdate()
+  {
+    when(repository.findById(1l)).thenReturn(Optional.of(person1));
+    person1.setId(null);
+    service.update(1l, person1);
+    verify(repository).findById(1l);
+    verify(repository).save(person1);
+    assertThat(person1.getId()).isEqualTo(1l);
+    person1.getContacts().forEach(contact -> {
+      assertThat(contact.getId()).isEqualTo(null);
+      assertThat(contact.getPerson()).isEqualTo(person1);
+    });
+
+    when(repository.findById(2l)).thenReturn(Optional.ofNullable(null));
+
+    assertThatThrownBy(() -> service.update(2l, person1))
+    .isInstanceOf(RuntimeException.class)
+    .hasMessage("PersonNotFound");
   }
 }
