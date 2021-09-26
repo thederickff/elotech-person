@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "persons")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
   @Id

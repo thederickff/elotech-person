@@ -10,11 +10,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "contacts")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Contact {
   
   @Id
