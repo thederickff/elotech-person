@@ -129,10 +129,24 @@ public class PersonEndpointUnitTest {
     assertThat(response.getStatusCodeValue()).isEqualTo(200);
     assertThat(response.getBody().getMessage()).isEqualTo("Ok");
 
-    person2.setName(null);
     when(endpoint.update(2l, person2)).thenThrow(new RuntimeException("AnyKindOfError"));
     response = endpoint.update(2l, person2);
     verify(service).update(2l, person2);
+    assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    assertThat(response.getBody().getMessage()).isEqualTo("AnyKindOfError");
+  }
+
+  @Test
+  void testDelete()
+  {
+    ResponseEntity<MessageResponse> response = endpoint.delete(1l);
+    verify(service).delete(1l);
+    assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    assertThat(response.getBody().getMessage()).isEqualTo("Ok");
+
+    when(endpoint.delete(2l)).thenThrow(new RuntimeException("AnyKindOfError"));
+    response = endpoint.delete(2l);
+    verify(service).delete(2l);
     assertThat(response.getStatusCodeValue()).isEqualTo(400);
     assertThat(response.getBody().getMessage()).isEqualTo("AnyKindOfError");
   }

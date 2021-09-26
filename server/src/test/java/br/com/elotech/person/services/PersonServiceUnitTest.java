@@ -178,4 +178,18 @@ public class PersonServiceUnitTest {
     .isInstanceOf(RuntimeException.class)
     .hasMessage("PersonNotFound");
   }
+
+  @Test
+  void delete()
+  {
+    when(repository.findById(1l)).thenReturn(Optional.of(person1));
+    service.delete(1l);
+    verify(repository).findById(1l);
+    verify(repository).deleteById(1l);
+    
+    when(repository.findById(1l)).thenReturn(Optional.ofNullable(null));
+    assertThatThrownBy(() -> service.delete(1l))
+    .isInstanceOf(RuntimeException.class)
+    .hasMessage("PersonNotFound");
+  }
 }

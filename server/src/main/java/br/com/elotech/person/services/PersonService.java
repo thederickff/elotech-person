@@ -65,6 +65,12 @@ public class PersonService {
 
     repository.save(person);
   }
+  
+  public void delete(Long id)
+  {
+    repository.findById(id).orElseThrow(() -> new RuntimeException("PersonNotFound"));
+    repository.deleteById(id);
+  }
 
   public boolean isValid(Person person)
   {
