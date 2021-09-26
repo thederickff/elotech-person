@@ -27,4 +27,5 @@ public class PersonEndpoint {
   {
     return ResponseEntity.ok(service.findAll(term, pageable));
   }
+
 }

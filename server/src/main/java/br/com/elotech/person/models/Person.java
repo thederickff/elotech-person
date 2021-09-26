@@ -27,4 +27,5 @@ public class Person {
   private LocalDate dateOfBirth;
   @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Contact> contacts;
+
 }
