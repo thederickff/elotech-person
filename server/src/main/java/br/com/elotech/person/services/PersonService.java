@@ -38,7 +38,31 @@ public class PersonService {
     return repository.findById(id);
   }
 
-  public void save(Person person)
+  public void store(Person person)
+  {
+    validate(person);
+
+    person.setId(null);
+
+    person.getContacts().forEach(contact -> {
+      contact.setId(null);
+      contact.setPerson(person);
+    });
+
+    repository.save(person);
+  }
+
+  public boolean isValid(Person person)
+  {
+    try {
+      validate(person);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  private void validate(Person person)
   {
     if (person.getName() == null) {
       throw new RuntimeException("PersonNameRequired");
@@ -85,7 +109,5 @@ public class PersonService {
         throw new RuntimeException("ContactEmailInvalid");
       }
     });
-
-    repository.save(person);
   }
 }

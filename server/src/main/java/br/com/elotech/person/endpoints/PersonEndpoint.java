@@ -12,9 +12,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.elotech.person.models.Person;
 import br.com.elotech.person.services.PersonService;
+import br.com.elotech.person.utilities.ResponseUtility;
+import br.com.elotech.person.utilities.ResponseUtility.MessageResponse;
 
 @RestController
 @RequestMapping("/api/persons")
@@ -38,5 +42,17 @@ public class PersonEndpoint {
   public ResponseEntity<Optional<Person>> findById(@PathVariable("id") Long id)
   {
     return ResponseEntity.ok(service.findById(id));
+  }
+
+  @PostMapping
+  public ResponseEntity<MessageResponse> store(@RequestBody Person person)
+  {
+    try {
+      service.store(person);
+      
+      return ResponseUtility.ok();
+    } catch (Exception e) {
+      return ResponseUtility.exception(e);
+    }
   }
 }
