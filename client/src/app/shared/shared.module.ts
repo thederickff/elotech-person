@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDividerModule,
     MatListModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ],
   exports: [
     MatButtonModule,
@@ -36,7 +38,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDividerModule,
     MatListModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }

@@ -1,3 +1,5 @@
+@import 'styles/colors.scss';
+
 html, body {
   height: 100%;
 }
@@ -53,4 +55,143 @@ a {
   color: #007bff;
   text-decoration: none;
   background-color: transparent;
+}
+
+table {
+  width: 100%;
+  tbody {
+    td {
+      padding-top: 1em !important;
+      padding-right: 1em !important;
+      padding-bottom: 1em !important;
+    }
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Pages */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: $secondary;
+  padding: 1em 1em 3.5em 1em;
+  font-size: 1.5em;
+
+  .title {
+    margin: 10px;
+    color: white;
+
+    mat-icon {
+      vertical-align: middle;
+    }
+
+    .custom-icon {
+      width: 24px;
+      color: #ffffff;
+      vertical-align: middle;
+    }
+  }
+
+  .search-wrapper {
+    margin: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 1.5em;
+    width: 30%;
+    padding: 0.25em 1em;
+    color: #757575;
+    
+    input {
+      display: block;
+      width: 100%;     
+      outline: none;   
+      margin-left: 10px;
+      border: none;
+    }
+  }
+
+  button {
+    margin: 10px;
+    padding: 0 2em;
+  }
+}
+
+@media(max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+
+    .search-wrapper {
+      width: 80%;
+    }
+  }
+}
+
+.page-content {
+  margin: -3.5em 1em 1em 1em;
+  
+  mat-card {
+    padding: 0;
+    overflow-x: auto;
+    border-radius: 0.5em;
+  }
+}
+
+.text-danger {
+  color: #f44336;
+}
+
+.text-center {
+  text-align: center;
+}
+
+form {
+  padding: 1em;
+
+  .form-group {
+    padding: 0.5em;
+  
+    label {
+      background: white;
+      font-size: 0.8rem;
+      padding: 0 0.5em;
+      margin-left: 0.5em;
+      color: rgba(0,0,0,.6);
+      transition: 1s;
+  
+      &.invalid {
+        color: #f44336;
+      }
+    }
+  
+    input, select {
+      display: block;
+      width: 100%;     
+      outline: none;     
+      font-size: 1rem;
+      padding: 1.2em 1em;
+      margin-top: -0.65em;
+      border: 2px solid rgba(0,0,0,.3);
+      border-radius: 0.5em;
+      transition: 1s;
+      
+    
+      &:hover, &:focus {
+        border: 2px solid rgba(0,0,0,.8);
+      }
+    
+      &.invalid {
+        border: 2px solid #f44336;
+      }
+    }
+
+    select {
+      background-color: #ffffff;
+    }
+  }
 }
