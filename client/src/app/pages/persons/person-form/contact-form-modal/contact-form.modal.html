@@ -23,9 +23,10 @@
   </div>
   <div class="d-flex justify-content-flex-end">
     <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button color="primary" (click)="submit()" [disabled]="!form || form.invalid">
-      <mat-icon>save</mat-icon>
-      Adicionar
+    <button mat-button [color]="data ? 'accent' : 'primary'" (click)="submit()" [disabled]="!form || form.invalid">
+      <mat-icon *ngIf="!data">save</mat-icon>
+      <mat-icon *ngIf="data">create</mat-icon>
+      {{ data ? 'Editar' : 'Adicionar' }}
     </button>
   </div>
 </form>

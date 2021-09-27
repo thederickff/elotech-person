@@ -74,14 +74,18 @@ export class PersonForm implements OnInit {
     }
   }
 
-  addContact() {
+  addContact(index?: number) {
     const ref = this.dialog.open(ContactFormModal, {
       width: '50em',
-      data: {}
+      data: this.contacts[index]
     });
 
     ref.afterClosed().subscribe(result => {
-      this.contacts.push(result);
+      if (index === 0 || index > 0) {
+        this.contacts[index] = result;
+      } else {
+        this.contacts.push(result);
+      }
     });
   }
 

@@ -43,10 +43,16 @@
       </div>
       <div class="contacts">
         <h2>Contatos Salvos</h2>
-        <div class="contact" *ngFor="let contact of contacts">
+        <div class="contact" *ngFor="let contact of contacts; let i = index">
           <strong>Nome:</strong> {{ contact.name }}.
           <strong>Telephone:</strong> {{ contact.telephone }}.
           <strong>Email:</strong> {{ contact.email }}.
+
+
+        <button mat-raised-button color="accent" (click)="addContact(i)">
+          <mat-icon>create</mat-icon>
+          Editar
+        </button>
         </div>
 
         <button mat-raised-button color="primary" (click)="addContact()">
