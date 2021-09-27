@@ -6,7 +6,7 @@ export const appShowMessage = (
   data: {
     header: string,
     message: string,
-    buttons: any[]
+    buttons?: any[]
   }
 ) => {
   dialog.open(AlertComponent, {
@@ -33,9 +33,26 @@ export const appCatchError = (
   message = 'Erro desconhecido',
   header = 'Ocorreu um Erro'
 ) => {
-  return (error: Error) => {
+  return (error: any) => {
+    const errorType = error.error ? error.error.message : error.message;
 
-    console.error(error);
+    switch (errorType) {
+      case 'PersonSocialSecurityNumberMustBeValid':
+        header = 'Pessoa';
+        message = 'CPF deve ser um número válido!';
+        break;
+      case 'PersonDateOfBirthMustBeInThePast':
+        header = 'Pessoa';
+        message = 'Data de nascimento deve estar no passado';
+        break;
+      case 'PersonContactsAtLeastOneRequired':
+      case 'PersonContactsRequired':
+        header = 'Pessoa';
+        message = 'Pelo menos um contato deverá ser informado!';
+        break;
+      default:
+        console.error(error);
+    }
 
     dialog.open(AlertComponent, {
       width: '20em',

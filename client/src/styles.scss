@@ -13,6 +13,16 @@ body {
   box-sizing: border-box;
 }
 
+.w-100 {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .w-md-50 {
+    width: 50%;
+  }
+}
+
 .d-flex {
   display: flex;
 }
@@ -188,6 +198,10 @@ form {
       &.invalid {
         border: 2px solid #f44336;
       }
+    }
+
+    input[type=date] {
+      padding: 1em;
     }
 
     select {

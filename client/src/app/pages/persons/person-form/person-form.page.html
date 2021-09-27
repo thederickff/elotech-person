@@ -1,0 +1,73 @@
+<div class="page-header">
+  <div class="title">{{ isEdit ? 'Editar' : 'Adicionar'}} Pessoa</div>
+</div>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <div class="preloader-wrapper active text-center">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div>
+      <div class="gap-patch">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-content">
+  <mat-card>
+    <form class="d-flex flex-wrap" *ngIf="!isLoading" [formGroup]="form">
+      <div class="form-group w-100">
+        <label for="name" [class.invalid]="isInvalid('name')">Nome</label>
+        <input type="text" id="name" formControlName="name" [class.invalid]="isInvalid('name')">
+        <small *ngIf="isInvalid('name')" class="form-text text-danger">
+          Campo Obrigatório
+        </small>
+      </div>
+      <div class="form-group w-100 w-md-50">
+        <label for="socialSecurityNumber" [class.invalid]="isInvalid('socialSecurityNumber')">CPF</label>
+        <input type="text" id="socialSecurityNumber" formControlName="socialSecurityNumber" [class.invalid]="isInvalid('socialSecurityNumber')">
+        <small *ngIf="isInvalid('socialSecurityNumber')" class="form-text text-danger">
+          Campo Obrigatório
+        </small>
+      </div>
+      <div class="form-group w-100 w-md-50">
+        <label for="dateOfBirth" [class.invalid]="isInvalid('dateOfBirth')">Data de Nascimento</label>
+        <input type="date" id="dateOfBirth" formControlName="dateOfBirth" [class.invalid]="isInvalid('dateOfBirth')">
+        <small *ngIf="isInvalid('dateOfBirth')" class="form-text text-danger">
+          Campo Obrigatório
+        </small>
+      </div>
+      <div class="contacts">
+        <h2>Contatos Salvos</h2>
+        <div class="contact" *ngFor="let contact of contacts">
+          <strong>Nome:</strong> {{ contact.name }}.
+          <strong>Telephone:</strong> {{ contact.telephone }}.
+          <strong>Email:</strong> {{ contact.email }}.
+        </div>
+
+        <button mat-raised-button color="primary" (click)="addContact()">
+          <mat-icon>add</mat-icon>
+          Adicionar
+        </button>
+      </div>
+      <div *ngIf="!isLoading" class="w-100 d-flex justify-content-flex-end">
+        <div class="p-1">
+          <a mat-raised-button [routerLink]="['/persons']">
+            <mat-icon>replay</mat-icon>
+            Voltar
+          </a>
+        </div>
+        <div class="p-1">
+          <button mat-raised-button color="primary" (click)="submit()" [disabled]="!form || form.invalid">
+            <mat-icon>save</mat-icon>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

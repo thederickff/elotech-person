@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { map, switchMap, take, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Person } from "../models/person.model";
@@ -38,6 +38,30 @@ export class PersonService {
         this.mPersons.next(persons);
       })
     )
+  }
+
+  find(id: number): Observable<Person> {
+    return this.http.get(`${this.mBaseUrl}/${id}`).pipe(
+      map(res => {
+        return new Person(res);
+      })
+    );
+  }
+
+  save(person: Person): Observable<void> {
+    let obs: Observable<any>;
+
+    if (person.id) {
+      obs = this.http.put(`${this.mBaseUrl}/${person.id}`, person);
+    } else {
+      obs = this.http.post(`${this.mBaseUrl}`, person);
+    }
+
+    return obs.pipe(
+      switchMap(() => {
+        return this.fetchAll();
+      })
+    );
   }
 
   delete(id: number): Observable<void> {
