@@ -11,9 +11,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { AlertComponent } from "../components/alert/alert.component";
+import { CommonModule } from "@angular/common";
+import { SocialSecurityNumberPipe } from "../pipes/social-security-number.pipe";
 
 @NgModule({
+  declarations: [
+    AlertComponent,
+    SocialSecurityNumberPipe
+  ],
   imports: [
+    CommonModule,
     MatButtonModule,
     MatSidenavModule,
     MatPaginatorModule,
@@ -39,7 +47,8 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     MatMenuModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    SocialSecurityNumberPipe
   ]
 })
 export class SharedModule { }

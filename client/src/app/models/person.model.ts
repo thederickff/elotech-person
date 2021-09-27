@@ -11,12 +11,14 @@ export class Contact {
 }
 
 export class Person {
+  id: string;
   name: string;
   socialSecurityNumber: string;
   dateOfBirth: Date;
   contacts: Contact[];
 
   constructor(res: any) {
+    this.id = res.id;
     this.name = res.name;
     this.socialSecurityNumber = res.socialSecurityNumber;
     this.dateOfBirth = new Date(res.dateOfBirth);

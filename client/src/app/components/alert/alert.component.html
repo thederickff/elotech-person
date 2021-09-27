@@ -1,0 +1,8 @@
+<h2>{{ data.title }}</h2>
+<p>{{ data.message }}</p>
+
+<div *ngIf="data.buttons" class="d-flex justify-content-flex-end">
+  <div *ngFor="let button of data.buttons" class="p-1">
+    <button color="primary" mat-raised-button mat-dialog-close>{{ button }}</button>
+  </div>
+</div>
