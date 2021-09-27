@@ -4,6 +4,10 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class SocialSecurityNumberPipe implements PipeTransform {
 
   transform(value: string) {
+    if (!value) {
+      return '';
+    }
+    
     if (value.length != 11) {
       return value;
     }

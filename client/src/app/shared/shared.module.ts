@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertComponent } from "../components/alert/alert.component";
 import { CommonModule } from "@angular/common";
 import { SocialSecurityNumberPipe } from "../pipes/social-security-number.pipe";
@@ -33,7 +34,8 @@ import { SocialSecurityNumberPipe } from "../pipes/social-security-number.pipe";
     MatListModule,
     MatMenuModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatButtonModule,
@@ -48,6 +50,7 @@ import { SocialSecurityNumberPipe } from "../pipes/social-security-number.pipe";
     MatMenuModule,
     MatToolbarModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     SocialSecurityNumberPipe
   ]
 })

@@ -11,7 +11,7 @@ export class Contact {
 }
 
 export class Person {
-  id: string;
+  id: number;
   name: string;
   socialSecurityNumber: string;
   dateOfBirth: Date;

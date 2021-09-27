@@ -4,7 +4,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Subscription } from "rxjs";
-import { appCatchError } from "src/app/app.functions";
+import { appCatchError, appShowLoading, appShowMessage } from "src/app/app.functions";
 import { Person } from "src/app/models/person.model";
 import { PersonService } from "src/app/services/person.service";
 
@@ -42,9 +42,12 @@ export class PersonsPage implements OnInit, OnDestroy {
       })
     );
 
-    this.personService.fetchAll().subscribe(() => {
 
+    const loading = appShowLoading(this.dialog);
+    this.personService.fetchAll().subscribe(() => {
+      loading.close();
     }, error => {
+      loading.close();
       appCatchError(this.dialog)(error);
     });
   }
@@ -64,7 +67,27 @@ export class PersonsPage implements OnInit, OnDestroy {
   }
 
   delete(id: number) {
-
+    appShowMessage(this.dialog, {
+      header: 'Apagar Pessoa',
+      message: 'Deseja realmente apagar essa pessoa?',
+      buttons: [
+        {
+          text: 'Não'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            const loading = appShowLoading(this.dialog);
+            this.personService.delete(id).subscribe(() => {
+              loading.close();
+            }, error => {
+              loading.close();
+              appCatchError(this.dialog)(error);
+            });
+          }
+        }
+      ]
+    });
   }
 
   private emptyTable(): any[] {

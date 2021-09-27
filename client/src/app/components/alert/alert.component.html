@@ -1,8 +1,13 @@
-<h2>{{ data.title }}</h2>
-<p>{{ data.message }}</p>
+<h2 *ngIf="data.header">{{ data.header }}</h2>
+<p *ngIf="data.message">{{ data.message }}</p>
+
+<div *ngIf="data.spinner" class="d-flex justify-content-center">
+  <mat-progress-spinner color="primary" mode="indeterminate" diameter="50"></mat-progress-spinner>
+</div>
 
 <div *ngIf="data.buttons" class="d-flex justify-content-flex-end">
-  <div *ngFor="let button of data.buttons" class="p-1">
-    <button color="primary" mat-raised-button mat-dialog-close>{{ button }}</button>
+  <div *ngFor="let button of $any(data.buttons)">
+    <button mat-button mat-dialog-close
+    (click)="$any(button).handler ? $any(button).handler() : undefined">{{ $any(button).text ? $any(button).text : button }}</button>
   </div>
 </div>

@@ -3,9 +3,10 @@ import { Component } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export class AlertModel {
-  title: string;
+  header: string;
   message: string;
-  buttons: string[];
+  buttons: string[] | { text: string, handler: () => void}[];
+  spinner: boolean;
 }
 
 @Component({
