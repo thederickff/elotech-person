@@ -7,6 +7,7 @@ import { Subscription } from "rxjs";
 import { appCatchError, appShowLoading, appShowMessage } from "src/app/app.functions";
 import { Person } from "src/app/models/person.model";
 import { PersonService } from "src/app/services/person.service";
+import { ContactsModal } from "./contacts-modal/contacts.modal";
 
 @Component({
   selector: 'app-persons',
@@ -19,6 +20,7 @@ export class PersonsPage implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Person>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  persons: Person[];
   subs: Subscription[] = [];
 
   constructor(
@@ -35,6 +37,7 @@ export class PersonsPage implements OnInit, OnDestroy {
     this.subs.push(
       this.personService.persons.subscribe(persons => {
         this.dataSource.data = persons;
+        this.persons = persons;
 
         if (persons.length === 0) {
           this.dataSource.data = this.emptyTable();
@@ -64,6 +67,15 @@ export class PersonsPage implements OnInit, OnDestroy {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  contacts(row: Person) {
+    this.dialog.open(
+      ContactsModal, {
+        data: row,
+        width: '50em'
+      }
+    );
   }
 
   delete(id: number) {

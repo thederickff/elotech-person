@@ -1,0 +1,12 @@
+<h2 *ngIf="data">Contatos de {{ data.name }}</h2>
+<div *ngIf="!data || !data.contacts || !data.contacts.length">Nenhum Contato</div>
+<ng-container *ngIf="data && data.contacts && data.contacts.length">
+  <div class="item" *ngFor="let contact of data.contacts">
+    <strong>Nome:</strong> {{ contact.name }}.
+    <strong>Telephone:</strong> {{ contact.telephone }}.
+    <strong>Email:</strong> {{ contact.email }}.
+  </div>
+</ng-container>
+<div class="d-flex justify-content-flex-end">
+    <button mat-button mat-dialog-close>Fechar</button>
+</div>
