@@ -1,0 +1,91 @@
+@import '../styles/colors.scss';
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .logo {
+    margin-left: 1em;
+  }
+
+  ul li {
+    list-style: none;
+  }
+
+  mat-drawer-container {
+    height: 100%; 
+
+    mat-drawer {
+      width: 17em;
+      background-color: #222325;
+
+      mat-nav-list {
+        padding-top: 0;
+
+        .profile-card {
+          text-align: center;
+          padding: 5em 0 2em 0;
+          border: none;
+      
+      
+          .header {
+            background-color: #222325;
+            
+            img {
+              background-color: #222325;
+              padding: 0.5em;
+              margin-top: -3em;
+              width: 150px;
+            }
+
+            h2 {
+              margin-top: 0.5em;
+              margin-bottom: 0.25em;      
+              color: rgba(#ffffff, 0.85);
+            }
+        
+            h4 {
+              margin-top: 0.25em;
+              color: rgba(#ffffff, 0.6);
+            }
+          }
+        }
+
+        h2 {
+          font-size: 16px;
+          font-weight: 500;
+          color: rgba(#ffffff, 0.6);
+          margin-left: 0.7em;
+        }
+
+        a {
+          color: rgba(#ffffff, 0.8);
+   
+          mat-icon {
+            vertical-align: middle;
+            margin-right: 0.8em;
+          }
+
+          .custom-icon {
+            width: 24px;
+            margin-right: 1.2em;
+            color: #cacfd4;
+          }
+        } 
+      }
+    }
+
+    mat-drawer-content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  footer {
+    background-color: $primary;
+    color: #ffffff;
+  }
+
+}

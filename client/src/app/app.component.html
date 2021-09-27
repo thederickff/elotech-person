@@ -1,1 +1,54 @@
-<button mat-raised-button>Button</button>
+<header>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sideBarToggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h6 routerLink="/">Pessoas</h6>
+      <div class="d-flex flex-row justify-content-flex-end ml-auto">
+        <ul class="d-flex flex-row">
+          <li>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>person_outline</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon id="exit">power_settings_new</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
+
+<mat-drawer-container>
+  <mat-drawer [mode]="mode" [opened]="sideBarOpen">
+    <mat-nav-list>
+      <div class="profile-card">
+        <div class="header">
+          <img src="assets/elotech_logo.png">
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <h2 matSubHeader>Páginas</h2>
+
+      <a mat-list-item routerLinkActive="mat-list-active" (click)="navigate('/persons')">
+        <mat-icon>people</mat-icon>
+        Pessoas
+      </a>
+      <a mat-list-item routerLinkActive="mat-list-active" href="https://www.elotech.com.br/" target="_blank">
+        <mat-icon>link</mat-icon>
+        Website
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+    <footer class="d-flex flex-wrap justify-content-center justify-content-lg-between mt-auto p-1">
+      <div class="p-1">Elotech © 2020 Person v0.0.1</div>
+    </footer>
+  </mat-drawer-content>
+</mat-drawer-container>

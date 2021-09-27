@@ -1,10 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: 'persons',
+    loadChildren: () => import('./pages/persons/persons.module').then(m => m.PersonsPageModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/persons'
+  }
+];
 
 @NgModule({
   declarations: [
@@ -12,8 +24,8 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     SharedModule
   ],
   providers: [],
